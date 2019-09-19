@@ -78,7 +78,7 @@ Cada pedido especifica: la _distancia_ a recorrer (expresada en kilómetros), el
 La _velocidad requerida_ de un pedido es el resultado de dividir la cantidad de kilómetros por el tiempo máximo.
 P.ej. si para un pedido de un viaje de 480 kilómetros se indica como tiempo máximo 6 horas, entonces la velocidad requerida de este pedido es de 80 kms/hora (480 / 6 = 80).   
 	
-Agregar la capacidad de preguntar _si un auto puede satisfacer un pedido_, enviándole un mensaje al viaje con el auto como parámetro. 
+Los pedidos deben poder _validar si un auto lo puede satisfacer_, enviándole un mensaje al pedido con el auto como parámetro. _Este mensaje debería falla_ si el vehículo no puede satisfacer el pedido, expresando por qué no puede, sino _no debería hacer nada_.
 
 Para que un auto pueda satisfacer un pedido se tienen que dar tres condiciones: 
 - que la velocidad máxima del auto sea al menos 10 km/h mayor a la velocidad requerida del pedido; 
@@ -87,10 +87,11 @@ Para que un auto pueda satisfacer un pedido se tienen que dar tres condiciones:
 
 P.ej. consideremos al auto al que llamamos `cachito` en el test de la etapa 1 (recordemos: capacidad 4 pasajeros, velocidad máxima 150 km/h, color rojo).
 - este auto puede satisfacer un pedido de 960 kms con tiempo máximo de 8 horas (lo que da una velocidad requerida de 120 km/h), para 4 pasajeros donde los colores incompatibles son azul y negro.
-- si agregamos el rojo a los colores incompatibles, o cambiamos la cantidad de pasajeros a 6, entonces `cachito` ya no puede satisfacer el pedido.
-- lo mismo si cambiamos el tiempo máximo a 6 horas, porque eso nos daría una velocidad requerida de 160 km/h.
+- si agregamos el rojo a los colores incompatibles, entonces `cachito` no pasa la validación porque tiene un color incompatible.
+- si cambiamos la cantidad de pasajeros a 6, entonces `cachito` no pasa la validación porque el pedido necesita transportar a ms pasajeros que los que entran en el auto.
+- y si cambiamos el tiempo máximo a 6 horas, entonces `cachito` no pasa la validación porque el pedido tendría una velocidad requerida de 160 km/h.
 
-Armar un test que compruebe esta especificación.
+Armar los tests que comprueben esta especificación.
 
 <br>
 
@@ -102,7 +103,6 @@ Agregar a cada dependencia un registro de los pedidos que hace. Se pueden agrega
 
 Agregar lo que haga falta al modelo para que se pueda conocer, para una dependencia:
 - el total de pasajeros en los pedidos que tiene registrados
-- _cuáles_ de los pedidos que tiene registrados no puede ser satisfecho por ninguno de los autos afectados a la dependencia.
 - dado un color, si es cierto que _todos_ los pedidos registrados lo tienen como color incompatible.
 
 También debe ser posible, enviando un mensaje al objeto que representa a una dependencia, _relajar_ todos los pedidos que tenga registrados.
