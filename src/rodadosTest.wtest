@@ -1,0 +1,22 @@
+import rodados.*
+
+describe "Tests de los rodados" {
+
+	var corsaAzul = new Corsa(color = "azul")
+	var autoEspecial = new Especial(
+		cantPasajeros = 2, 
+		velocidadMaxima = 130, 
+		peso = 1500, 
+		color = "Blanco"
+	)
+
+	test "corsa tiene color correcto" {
+		assert.equals("azul", corsaAzul.color())
+	}
+
+	test "corsa tiene cantidad de pasajeros correcta" {
+		assert.equals(4, corsaAzul.cantPasajeros())
+	}
+
+}
+
